@@ -1,0 +1,23 @@
+# Use an official UBI Python runtime
+FROM registry.access.redhat.com/ubi8/python-38
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the current directory contents into the container
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
+
+# Define environment variable
+ENV NAME World
+
+# Switch to non-root user (Note: '1001' is a commonly used user ID in UBI images)
+USER 1001
+
+# Run app.py when the container launches
+CMD ["python", "./app.py"]
