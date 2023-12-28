@@ -19,8 +19,8 @@ EXPOSE 3000
 # Setup the database and grant privileges
 RUN apt-get update && \
     apt-get install -y postgresql-client && \
-    psql -h <host> -U <username> -d <database> -c 'CREATE DATABASE todo_list;' && \
-    psql -h <host> -U <username> -d <database> -c 'GRANT ALL PRIVILEGES ON DATABASE todo_list TO developer;'
+    psql -h <actual_postgresql_host> -U <actual_postgresql_username> -d <actual_postgresql_database> -c 'CREATE DATABASE todo_list;' && \
+    psql -h <actual_postgresql_host> -U <actual_postgresql_username> -d <actual_postgresql_database> -c 'GRANT ALL PRIVILEGES ON DATABASE todo_list TO developer;'
 
 # Command to run the application
 CMD ["node", "index.js"]
