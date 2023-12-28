@@ -20,8 +20,8 @@ EXPOSE 3000
 RUN apt-get update && \
     apt-get install -y postgresql-client && \
     export PGPASSWORD=mysecretpassword && \
-    psql -h postgresql.test-project.svc.cluster.local -U developer -d todo_list -c 'CREATE DATABASE todo_list;' && \
-    psql -h postgresql.test-project.svc.cluster.local -U developer -d todo_list -c 'GRANT ALL PRIVILEGES ON DATABASE todo_list TO developer;'
+    psql -h 172.30.227.219 -U developer -d todo_list -c 'CREATE DATABASE todo_list;' && \
+    psql -h 172.30.227.219 -U developer -d todo_list -c 'GRANT ALL PRIVILEGES ON DATABASE todo_list TO developer;'
 
 # Command to run the application
 CMD ["node", "index.js"]
