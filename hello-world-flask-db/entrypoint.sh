@@ -10,6 +10,7 @@ function wait_for_db() {
     echo "Database not ready. Waiting..."
     sleep 1
   done
+  echo "Database ready."
 }
 
 # Initialize the database if necessary.
@@ -21,7 +22,7 @@ function initialize_db() {
 
   export PGPASSWORD="$db_password"
   echo "Creating database '$db_name' if it doesn't exist..."
-  psql -h "$db_host" -U "$db_user" -tc "SELECT 1 FROM pg_database WHERE datname = '$db_name'" | grep -q 1 || psql -h "$db_host" -U "$db_user" -c "CREATE DATABASE \"$db_name\""
+  psql -h "$db_host" -U "$db_user" -d "postgres" -tc "SELECT 1 FROM pg_database WHERE datname = '$db_name'" | grep -q 1 || psql -h "$db_host" -U "$db_user" -d "postgres" -c "CREATE DATABASE \"$db_name\""
 
   echo "Granting privileges to user '$db_user' on database '$db_name'..."
   psql -h "$db_host" -U "$db_user" -d "$db_name" -c "GRANT ALL PRIVILEGES ON DATABASE \"$db_name\" TO \"$db_user\""
@@ -37,6 +38,7 @@ function create_schema() {
   export PGPASSWORD="$db_password"
 
   # SQL to create the 'tasks' table
+  echo "Creating schema for database '$db_name'..."
   psql -h "$db_host" -U "$db_user" -d "$db_name" <<-EOSQL
     CREATE TABLE IF NOT EXISTS tasks (
       id SERIAL PRIMARY KEY,
