@@ -5,7 +5,7 @@ const host = process.env.DB_HOST || "postgresql";
 const user = process.env.DB_USER || "developer";
 const password = process.env.DB_PASSWORD || "developer";
 const database = "todo_list";
-const client = new Client({ host, user, database, user, password });
+const client = new Client({ host, user, database, password });
 
 module.exports = {
     connect, close, list, create
