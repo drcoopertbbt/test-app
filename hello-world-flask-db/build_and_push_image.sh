@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-IMAGE=quay.io/repository/marzquay/todo-list
+IMAGE=quay.io/marzquay/todo-list:latest
 
 podman build -t ${IMAGE} .
 
