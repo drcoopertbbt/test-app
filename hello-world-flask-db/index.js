@@ -30,7 +30,7 @@ api.addHook("onClose", async () => {
 
 async function serve() {
   try {
-    await connectToDatabase(); // Replace with the actual function you use to connect
+    await DB.connect(); // Replace with the actual function you use to connect
     // ... Rest of your server logic
   } catch (error) {
     console.error('Failed to connect to the database', error);
