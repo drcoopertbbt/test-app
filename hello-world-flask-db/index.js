@@ -30,14 +30,14 @@ api.addHook("onClose", async () => {
 
 async function serve() {
   try {
-    await DB.connect(); // Replace with the actual function you use to connect
-    // ... Rest of your server logic
+    await DB.connect();
+    await api.listen(process.env.PORT || 3000, '0.0.0.0');
   } catch (error) {
-    console.error('Failed to connect to the database', error);
-    // Handle the error appropriately, such as retrying connection or exiting the process
-    process.exit(1); // Exit with a non-zero exit code to indicate failure
+    console.error('Failed to start the server or connect to the database', error);
+    process.exit(1);
   }
 }
+
 
 
 
