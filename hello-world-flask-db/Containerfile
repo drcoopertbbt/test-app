@@ -11,12 +11,13 @@ COPY package*.json ./
 RUN npm install
 
 # Install PostgreSQL client tools
-RUN apt-get update && apt-get install -y postgresql-client
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for PostgreSQL connection
 ENV DB_USER=developer
+ENV DB_PASSWORD=test
 ENV DB_HOST=postgresql
-ENV DB_DATABASE=todo_list
+ENV DB_NAME=todo_list
 
 # Copy the application files to the working directory
 COPY . .
