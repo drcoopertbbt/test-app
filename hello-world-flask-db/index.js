@@ -6,7 +6,7 @@ const api = Fastify({ logger: true });
 
 
 api.get("/", async () => {
-    return { title: 'Davids Todo List API' };
+    return { title: 'Davids Fun Todo List API' };
 });
 
 
