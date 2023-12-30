@@ -3,7 +3,7 @@ const { Client } = require("pg");
 
 const host = process.env.DB_HOST || "postgresql";
 const user = process.env.DB_USER || "developer";
-const password = process.env.DB_PASSWORD || "developer";
+const password = process.env.DB_PASSWORD || "test";
 const database = "todo_list";
 const client = new Client({ host, user, database, password });
 
