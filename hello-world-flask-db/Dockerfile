@@ -1,0 +1,36 @@
+# Use the official Node.js 14 image as the base image
+FROM node:14
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install the dependencies
+RUN npm install
+
+# Install PostgreSQL client tools
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+
+# Set environment variables for PostgreSQL connection
+ENV DB_USER=developer
+ENV DB_PASSWORD=test
+ENV DB_HOST=postgresql
+ENV DB_NAME=todo_list
+
+# Copy the application files to the working directory
+COPY . .
+
+# Copy the entrypoint script to the container and set the execute permission
+COPY entrypoint.sh /usr/src/app/entrypoint.sh
+RUN chmod +x /usr/src/app/entrypoint.sh
+
+# Expose port 3000
+EXPOSE 3000
+
+# Set the entrypoint script as the entrypoint
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+
+# Command to run the application
+CMD ["node", "index.js"]
