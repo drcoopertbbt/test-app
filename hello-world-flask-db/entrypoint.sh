@@ -16,7 +16,7 @@ function wait_for_db() {
     echo "Database not ready. Waiting..."
     sleep 1
   done
-  echo "Database ready."
+  echo "Database is ready David."
 }
 
 # Initialize the database if necessary.
