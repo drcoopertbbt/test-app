@@ -22,16 +22,6 @@ api.post("/todos", async function createTodo(request, reply) {
     return reply.code(201).send();
 });
 
-api.get("/todos/:id", async function (request, reply) {
-  const id = request.params.id;
-  const todo = await DB.get(id); // Implement the 'get' method in your DB module
-  if (todo) {
-      return todo;
-  } else {
-      reply.code(404).send({ message: "Todo not found" });
-  }
-});
-
 
 api.addHook("onClose", async () => {
     await DB.close();
